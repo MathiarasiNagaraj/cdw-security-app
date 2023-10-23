@@ -1,0 +1,5 @@
+@import '../../styles/index.module.scss';
+.location-wrapper {
+    padding-top: 50px;
+    @include flex($direction: column, $alignItems: center);
+  }

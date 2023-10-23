@@ -1,0 +1,12 @@
+@import '../../styles/index.module.scss';
+.loader-wrapper{
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   svg{
+        height: 60px;
+        width: 60px;
+    }
+}

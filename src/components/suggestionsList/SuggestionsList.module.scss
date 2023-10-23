@@ -1,0 +1,26 @@
+@import '../../styles/index.module.scss';
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    position:absolute;
+
+    max-height: 180px;
+    overflow-y: auto;
+    width: 385px;
+    top:245px;
+    font-size: 10px;
+  }
+  .suggestion {
+    background-color: $white;
+    padding: 10px;
+    color: $black;
+    cursor: pointer;
+  }
+  .suggestion:hover {
+    background-color: $grey;
+    color:$white;
+  }
+  .selected {
+    background-color: $black;
+    color: rgb(238, 223, 223);
+  }

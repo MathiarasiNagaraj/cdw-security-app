@@ -1,0 +1,44 @@
+@import '../../styles/index.module.scss';
+.primary-btn{
+    background-color: $black;
+    color:$white;
+    border: none;
+    padding: 13px 80px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.secondary-btn{
+    background-color: $black;
+    color:$white;
+    border: none;
+    font-size: 12px;
+    padding: 13px 17px;
+    cursor: pointer;
+    align-self: flex-end;
+ 
+}
+.delete-btn
+{
+    background-color: $white;
+    border: none;
+   color:$red; 
+   font-size: 13px;
+   font-weight: 550;
+   padding: 0;
+   cursor: pointer;
+}
+.cancel-btn{
+    background-color: $white;
+    border: none;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.edit-btn{
+    color:$blue;
+    background-color: $white;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}

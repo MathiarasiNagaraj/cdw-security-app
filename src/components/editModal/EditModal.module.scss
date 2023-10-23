@@ -1,0 +1,76 @@
+@import "../../styles/index.module.scss";
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  @include flex($alignItems: center, $justifyContent: center);
+}
+
+.modal {
+  margin: auto 0;
+  position: relative;
+  background-color: $white;
+  width: 385px;
+  display: flex;
+  justify-content: center;
+flex-direction: column;
+  padding: 15px;
+  height: 320px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  h3 {
+    color: #8e8e8e;
+    font-weight: 500;
+    margin-bottom: 0px;
+    margin-top: 3px;
+    font-size: 14px;
+  }
+  h2{
+    font-size: 15px;
+    font-weight: 500;
+    color:$black;
+    margin: 0px 0px;
+    margin-bottom: 15px;
+  }
+  svg {
+    position: absolute;
+    top: 20px;
+    right: 5px;
+    padding: 0px 10px;
+    font-size: 53px;
+    cursor: pointer;
+
+  }
+  input {
+
+    width: 350px;
+    border: 1.5px solid $black;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding: 13px;
+    &:disabled {
+      background-color: $light-grey;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  .button-wrapper {
+
+    @include flex($alignItems: center, $justifyContent: space-between);
+  }
+}

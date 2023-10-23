@@ -1,0 +1,57 @@
+@import "../../styles/index.module.scss";
+.sidebar-filter {
+  height: 100%;
+  width: 0px;
+  background-color: $dark-red;
+  position: absolute;
+  z-index: 10;
+  top: 0px;
+  right: 0px;
+  transition: width 0.5s;
+  overflow: hidden;
+  .wrapper {
+    position: relative;
+    padding: 0px 20px;
+    svg {
+      position: absolute;
+      top: 3px;
+      right: 18px;
+      font-size: 16px;
+      font-weight: 300 !important;
+      color: $white;
+      cursor: pointer;
+    }
+    h4 {
+      font-size: 20px;
+      color: #f1dade;
+      font-weight: 400;
+    }
+    form {
+      @include flex($direction: column);
+      gap:20px;
+      margin-top: 30px;
+      .form-fields {
+        h2 {
+          font-size: 14px;
+          color: #f1dade;
+          font-weight: 400;
+          margin-bottom: 1px;
+        }
+        &:last-of-type {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+.active {
+  width: 350px;
+}
+.sidebar-filter:not(.active) {
+  svg {
+    display: none;
+  }
+  .wrapper {
+    display: none;
+  }
+}

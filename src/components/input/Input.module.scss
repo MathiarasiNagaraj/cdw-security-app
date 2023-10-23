@@ -1,0 +1,59 @@
+@import '../../styles/index.module.scss';
+.border-input{
+    width: 360px;
+    height: 10px;
+    font-size: 12px;
+    color:$black;
+    outline: none;
+    padding: 22px;
+    border: 1px solid $darker-grey;
+    &::placeholder{
+        font-size: 12px;
+        color:$grey;
+    }
+}
+.border-input[type="password"] {
+    letter-spacing: 4px;
+    font-size: 16px;
+    &::placeholder{
+    letter-spacing: 0px;
+    }
+}
+
+.filter-input{
+    width: 300px;
+    height: 12px;
+    font-size: 12px;
+    color:$black;
+    outline: none;
+    padding: 20px;
+    border: none;
+}
+.filter-input {
+    
+    &::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+    ::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+    ::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+        color: transparent;
+    }
+}
+
+.border-less-input{
+    width: 385px;
+    height: 15px;
+    font-size: 13px;
+    color:$black;
+    outline: none;
+    padding: 22px;
+    &::placeholder{
+        font-size: 12px;
+        color:$grey;
+    } 
+    border: none;
+}
+.border-less-input[type="number"]{
+    &::-webkit-inner-spin-button,::-webkit-outer-spin-button{
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}

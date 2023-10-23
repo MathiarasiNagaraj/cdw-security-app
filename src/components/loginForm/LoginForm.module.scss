@@ -1,0 +1,12 @@
+@import '../../styles/index.module.scss';
+.form-container{
+    @include flex($direction:column,$gap:15px);
+    height: 100vh;
+ margin-top: 28px;
+padding: 0px 18px;
+ width: 100%;
+    h4{
+        font-size: 14px;
+        margin: 0;
+    }
+}

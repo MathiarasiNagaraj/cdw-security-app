@@ -1,0 +1,12 @@
+@import '../../styles/index.module.scss';
+.index-wrapper {
+    padding-top: 60px;
+    @include flex($direction: column, $alignItems: center);
+    h1 {
+      margin-top: 22px;
+      color: $black;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 37px;
+    }
+  }

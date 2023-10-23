@@ -1,0 +1,16 @@
+@import '../../styles/index.module.scss';
+.wrapper{
+    margin-top: 160px;
+    .branch-wrapper{
+        @include flex($justifyContent:center,$alignItems:center,$gap:20px);
+        flex-wrap: wrap;
+   
+    }
+    p{
+        text-align: center;
+font-size: 24px;
+font-weight: 350;
+margin-bottom: 18px;
+
+    }
+}
