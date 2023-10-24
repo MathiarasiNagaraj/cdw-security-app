@@ -73,7 +73,7 @@ const RecordTemperatureContainer = () => {
           ) : (
             <div className={styles["record-container"]}>{records}</div>
           )}
-          <Link href={`${branch}/viewrecords`}>{TODAY_RECORD.link}</Link>
+          <Link href={`${branch}/records`}>{TODAY_RECORD.link}</Link>
         </>
       )}
     </div>

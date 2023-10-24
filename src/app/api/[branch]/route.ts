@@ -20,9 +20,9 @@ export async function GET(request: any,context: { params: any }) {
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: `${sheetName}`,
     });
-    console.log(sheetName)
+
     if (response.data && response.data.values) {
-      console.log(response.data.values)
+     
       return NextResponse.json({
         data: response.data.values,
     
@@ -68,7 +68,7 @@ export async function PATCH(request: Request, context: { params: any }) {
   try {
     const sheetName = context.params.branch;
     const body = await request.json();
-    console.log(body,sheetName)
+
     const response = await sheets.spreadsheets.values.update({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: `${sheetName}!A${body.range}:E${body.range}`,
@@ -128,7 +128,7 @@ export async function DELETE(request: Request, context: { params: any }) {
       },
     };
     const response = await sheets.spreadsheets.batchUpdate(deleteRequest);
-    console.log(response.data.updatedSpreadsheet?.namedRanges, response.status);
+
     return NextResponse.json(`${response.data.updatedSpreadsheet?.namedRanges}`);
   } catch (error) {
     console.error("DELETE Error:", error);

@@ -16,21 +16,21 @@ export const LOGIN = {
     title: 'Select Office',
     branch: [
       {
-        url: 'Chennai',
+        url: 'chennai',
         branch: 'CHENNAI',
         name: 'Chennai',
         src:'/images/chennai.svg'
         
       },
       {
-        url: 'Bengaluru',
+        url: 'bengaluru',
         branch: 'BENGALURU',
         name: 'Bengaluru',
         src:'/images/bengaluru.svg'
         
       },
       {
-        url: 'Hyderabad',
+        url: 'hyderabad',
         branch: 'HYDERABAD',
         name: 'Hyderabad',
         src:'/images/hyderabad.svg'

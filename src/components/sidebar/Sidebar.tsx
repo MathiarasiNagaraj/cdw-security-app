@@ -22,7 +22,7 @@ const Sidebar = () => {
   const location = paths[1];
   const route = paths[paths.length - 1];
 
-  console.log(location);
+
   const topbar = TOPBAR_ROUTE(route);
   const showSidebar = () => {
     setSidebar(true);
