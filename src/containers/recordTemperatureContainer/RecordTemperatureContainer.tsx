@@ -30,7 +30,7 @@ const RecordTemperatureContainer = () => {
       if (branch) {
         const data = await getRecordByBranchAndDate(branch, date);
         setData(data);
-      
+        console.log(data);
         setRecentRecords(data);
         setiIsLoading(false);
       }
