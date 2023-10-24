@@ -25,11 +25,12 @@ const Sidebar = () => {
   const topbar = TOPBAR_ROUTE(route);
   const showSidebar = () => {
     setSidebar(true);
+    setFilterOpen(false);
 }
   const sidebarClasses = [styles['sidebar-nav']];
   if (sidebar) {
     sidebarClasses.push(styles['active']);
-    setSidebarOpen(true);
+    //setSidebarOpen(true);
   
   }
 
@@ -41,10 +42,10 @@ const Sidebar = () => {
 }
   const closeSidebar = () => {
     setSidebar(false);
-    setSidebarOpen(false);
+   // setSidebarOpen(false);
  }
 
-  const routes = SIDEBAR_ROUTES.map((route) => <Link href={`${route.url(location)}`} key={route.name} className={styles['nav-items']}>{ route.name}</Link>)
+  const routes = SIDEBAR_ROUTES.map((route) => <Link href={`${route.url(location)}`} key={route.name} className={styles['nav-items']} onClick={closeSidebar} >{ route.name}</Link>)
 
   return (
     <>

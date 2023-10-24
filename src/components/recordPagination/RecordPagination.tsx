@@ -50,11 +50,13 @@ interface RecordPaginationProps {
 
   const onFilterOpenHandler = () => {
     setIsFilterOpen(true);
+    setSidebarOpen(false);
   }
  
    const onFilterClose = () => {
     setFilterOpen(false);
-     setIsFilterOpen(false); 
+     setIsFilterOpen(false);
+
    
 }
   return (
