@@ -32,7 +32,7 @@ export const RecordContainer: React.FC<RecordContainerProps> = ({
  
 
   const onUpSortHandler = (data:any) => {
-    const sortData = [...recordData];
+    const sortData = [...(recordData || []) as string[][]];
 
     if (data != 1 || data != 4) sortData.sort((a:any, b:any) => a[data] - b[data]);
     if (data == 1) sortData.sort((a, b) => a[data].localeCompare(b[data]));
@@ -48,7 +48,7 @@ export const RecordContainer: React.FC<RecordContainerProps> = ({
   };
   const onDownSortHandler = (data: number) => {
     const sortData =  [...(recordData || []) as string[][]];
-    if (data != 1 && data != 4) sortData.sort((a, b) => (b[data] - a[data]));
+    if (data != 1 && data != 4) sortData.sort((a:any, b:any) => (b[data] - a[data]));
     if (data == 1) sortData.sort((a, b) => b[data].localeCompare(a[data]));
     if (data == 3) sortData.sort(customDescendingSort);
     setRecordData(sortData);
