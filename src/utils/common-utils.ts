@@ -63,3 +63,14 @@ export const getCurrentDate = () => {
   }
   
   
+  export function customAscendingSort(a:any, b:any) {
+    const timeA = convertTimeToSortableFormat(a[3]);
+    const timeB = convertTimeToSortableFormat(b[3]);
+
+    return timeA.localeCompare(timeB);
+  }
+  export function customDescendingSort(a:any, b:any) {
+    const timeA = convertTimeToSortableFormat(a[3]);
+    const timeB = convertTimeToSortableFormat(b[3]);
+    return timeB.localeCompare(timeA);
+  }

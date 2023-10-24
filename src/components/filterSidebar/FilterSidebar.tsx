@@ -12,12 +12,16 @@ interface Data {
   identifier: string;
   value: string;
 }
+interface FilterSidebarProps{
+  isFilterOpen: boolean;
+  onCloseFilter: () => void;
+  onDataFilter:(data:any)=>void
+}
+export const FilterSidebar : React.FC<FilterSidebarProps> =  ({ isFilterOpen, onCloseFilter,onDataFilter}) => {
 
-export const FilterSidebar = ({ isFilterOpen, onCloseFilter, branch ,onDataFilter}) => {
 
-
-  const [date, setDate] = useState();
-  const [name, setName] = useState();
+  const [date, setDate] = useState<string>();
+  const [name, setName] = useState<string>();
   const [isSidebarOpen, setSidebarOpen] = useRecoilState(sidebars);
   const [isFilterOpened, setFilterOpen] = useRecoilState(filterSidebar);
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -49,6 +53,7 @@ export const FilterSidebar = ({ isFilterOpen, onCloseFilter, branch ,onDataFilte
         type={field.type}
         max={new Date().toISOString().split('T')[0]}
         onChange={onInputChangeHandler}
+        placeholder=''
       />
     </div>
   ));
@@ -74,7 +79,7 @@ export const FilterSidebar = ({ isFilterOpen, onCloseFilter, branch ,onDataFilte
       }`}
     >
       <div className={styles["wrapper"]}>
-        <AiOutlineClose onClick={onCloseFilterHandler}/>
+      <span onClick={onCloseFilterHandler}><AiOutlineClose /></span>  
 
         <h4>{SIDEBAR_FILTER.title}</h4>
         <form onSubmit={onSubmitHandler} ref={formRef}>

@@ -32,7 +32,7 @@ import styles from './ViewRecordsContainer.module.scss'
       }
       getData();
     }, [branch]);
-    const onDataFilterHandler = async(data) => {
+    const onDataFilterHandler = async(data:any) => {
 
       setIsLoading(true);
       if (branch) {

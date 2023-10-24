@@ -62,7 +62,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
       onClick={(e) => e.stopPropagation()}
     >
       <ToastContainer />
-      <AiOutlineCloseCircle onClick={onCloseModalHandler} />
+     <span  onClick={onCloseModalHandler}><AiOutlineCloseCircle /></span> 
       <h1> {DELETE.title}</h1>
       <h5> {DELETE.description}</h5>
       <div className={styles["button-wrapper"]}>

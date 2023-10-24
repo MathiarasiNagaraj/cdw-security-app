@@ -127,7 +127,7 @@ export const EditModal: React.FC<EditModalProps> = ({
                   />
                 )}
               </div>
-              <AiOutlineCloseCircle onClick={closeModal} />
+            <span onClick={closeModal} > <AiOutlineCloseCircle /></span> 
             </div>
           ) : (
             <DeleteModal

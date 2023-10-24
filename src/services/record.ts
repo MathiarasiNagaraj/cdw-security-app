@@ -47,7 +47,7 @@ export const getCountByBranch = async(branch:string) => {
   return response?.length+1;
 }
 
-export const addRecordForBranch = async (data:object) => {
+export const addRecordForBranch = async (data:any) => {
 
     const response = await fetch(`/api/${data.branch}`, {
         method: 'POST',
@@ -62,7 +62,7 @@ export const addRecordForBranch = async (data:object) => {
     return responseStatus.status;
 }
 
-export const editRecordForBranch = async (data:object) => {
+export const editRecordForBranch = async (data:any) => {
     const response = await fetch(`/api/${data.branch}`, {
         method: 'PATCH',
         headers: {
@@ -75,7 +75,7 @@ export const editRecordForBranch = async (data:object) => {
     const responseStatus = response;
     return responseStatus.status;
 }
-export const deleteRecordForBranch = async (data:object) => {
+export const deleteRecordForBranch = async (data:any) => {
 
     const response = await fetch(`/api/${data.branch}`, {
         method: 'DELETE',

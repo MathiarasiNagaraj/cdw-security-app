@@ -2,9 +2,9 @@ import { Record } from "@/components/record/Record";
 import React, { useEffect, useState } from "react";
 import styles from "./RecordContainer.module.scss";
 import PropType from "prop-types";
-import { BiFilterAlt, BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
+import {  BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import { PAGINATION_HEADER } from "@/constants/commom-constants";
-import { convertTimeToSortableFormat } from "@/utils/common-utils";
+import {customAscendingSort,customDescendingSort} from "@/utils/common-utils";
 
 interface RecordContainerProps {
   start: number;
@@ -17,59 +17,45 @@ export const RecordContainer: React.FC<RecordContainerProps> = ({
   end,
   records,
 }) => {
-
-  const [recordData, setRecordData] = useState([]);
+  const [recordData, setRecordData] = useState<string[][]>();
   const [Arrow, setArrow] = useState([
-    { id:0, isShowUp: true ,isShowDown: false},
-    { id:1, isShowUp: true ,isShowDown: false},
-    {id:2, isShowUp: true ,isShowDown: false},
-    { id: 3, isShowUp: true,isShowDown: false }
+    { id: 0, isShowUp: true, isShowDown: false },
+    { id: 1, isShowUp: true, isShowDown: false },
+    { id: 2, isShowUp: true, isShowDown: false },
+    { id: 3, isShowUp: true, isShowDown: false },
   ]);
 
- 
   useEffect(() => {
     const slicedRecords = records?.slice(start, end);
     setRecordData(slicedRecords);
-  }, [start, end,records]);
-  function customAscendingSort(a, b) {
-    const timeA = convertTimeToSortableFormat(a[3]);
-    const timeB = convertTimeToSortableFormat(b[3]);
+  }, [start, end, records]);
+ 
 
-    return timeA.localeCompare(timeB);
-  }
-  function customDescendingSort(a, b) {
-    const timeA = convertTimeToSortableFormat(a[3]);
-    const timeB = convertTimeToSortableFormat(b[3]);
-    return timeB.localeCompare(timeA);
-  }
-
-
-  const onUpSortHandler = (data) => {
+  const onUpSortHandler = (data:any) => {
     const sortData = [...recordData];
 
-    if (data != 1 || data != 4) sortData.sort((a, b) => a[data] - b[data]);
+    if (data != 1 || data != 4) sortData.sort((a:any, b:any) => a[data] - b[data]);
     if (data == 1) sortData.sort((a, b) => a[data].localeCompare(b[data]));
     if (data == 3) sortData.sort(customAscendingSort);
     setRecordData(sortData);
     setArrow((prevItems) => {
       return prevItems.map((item) =>
         item.id === data
-          ? { ...item, isShowUp: !item.isShowUp,isShowDown:!item.isShowDown }
+          ? { ...item, isShowUp: !item.isShowUp, isShowDown: !item.isShowDown }
           : item
       );
     });
- 
   };
-  const onDownSortHandler = (data) => {
-    const sortData = [...recordData];
-    if (data != 1 || data != 4) sortData.sort((a, b) => b[data] - a[data]);
+  const onDownSortHandler = (data: number) => {
+    const sortData =  [...(recordData || []) as string[][]];
+    if (data != 1 && data != 4) sortData.sort((a, b) => (b[data] - a[data]));
     if (data == 1) sortData.sort((a, b) => b[data].localeCompare(a[data]));
     if (data == 3) sortData.sort(customDescendingSort);
     setRecordData(sortData);
     setArrow((prevItems) => {
       return prevItems.map((item) =>
         item.id === data
-          ? { ...item, isShowUp: !item.isShowUp,isShowDown:!item.isShowDown }
+          ? { ...item, isShowUp: !item.isShowUp, isShowDown: !item.isShowDown }
           : item
       );
     });
@@ -82,11 +68,17 @@ export const RecordContainer: React.FC<RecordContainerProps> = ({
           <div className={styles["header"]} key={index}>
             {item.name}
             <div>
-   
-            {Arrow[index].isShowUp&&  <BiSolidUpArrow onClick={() => onUpSortHandler(index)} />}
-              {Arrow[index].isShowDown && <BiSolidDownArrow
-                onClick={() => onDownSortHandler(index)}
-              />}
+              {Arrow[index].isShowUp && (
+                <span onClick={() => onUpSortHandler(index)}>
+                  {" "}
+                  <BiSolidUpArrow />{" "}
+                </span>
+              )}
+              {Arrow[index].isShowDown && (
+                <span onClick={() => onDownSortHandler(index)}>
+                  <BiSolidDownArrow />
+                </span>
+              )}
             </div>
           </div>
         ))}
@@ -95,7 +87,7 @@ export const RecordContainer: React.FC<RecordContainerProps> = ({
         recordData.map((data: string[], index: number) => (
           <Record
             key={index}
-            id={data[0]}
+            id={index}
             registerID={data[0]}
             name={data[1]}
             temperature={data[2]}

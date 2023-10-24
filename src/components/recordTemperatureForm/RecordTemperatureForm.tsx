@@ -108,6 +108,7 @@ export const RecordTemperatureForm = () => {
       styleName={field.style}
       key={field.type}
       type={field.type}
+      max=''
       onChange={onInputChangeHandler}
     />
   ));

@@ -6,7 +6,7 @@ import styles from './Sidebar.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SIDEBAR_ROUTES, TOPBAR_ROUTE } from '../../constants/route-constants'
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import withAuth from '@/hoc/withAuth';
 import { useRecoilState } from "recoil";
 import { filterSidebar, sidebars } from "@/state/atom/Record";
@@ -52,7 +52,7 @@ const Sidebar = () => {
 
         <div className={styles['nav']}>
           <div className={styles['nav-icon']}>
-            <HiMiniBars3 onClick={showSidebar} />
+           <span onClick={showSidebar}> <HiMiniBars3  /> </span> 
    
           </div>
         <h1>{topbar}</h1>
@@ -62,7 +62,7 @@ const Sidebar = () => {
           <div className={styles['sidebar-wrapper']}>
             <div className={styles['text']}>
             <div  className={styles['nav-icon-close']}>
-               <AiOutlineClose onClick={closeSidebar} />
+            <span onClick={closeSidebar}>  <AiOutlineClose  /></span>  
             </div>
             <Link href="/">
           <Image className={styles['logo']} src='/images/cdwLogoWhite.png' alt='cdw-logo' height='70' width='125' />

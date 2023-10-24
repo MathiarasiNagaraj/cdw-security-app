@@ -1,13 +1,20 @@
 import React from "react";
 import styles from "./SuggestionsList.module.scss";
-export const SuggestionsList = (props) => {
-  const {
-    suggestions,
-    inputValue,
-    onSelectSuggestion,
-    displaySuggestions,
-    selectedSuggestion,
-  } = props;
+
+
+interface SuggestionsListProps{
+  suggestions:string[],
+  inputValue:string,
+  onSelectSuggestion:(index:number)=>void,
+  displaySuggestions:boolean,
+  selectedSuggestion:number,
+}
+export const SuggestionsList : React.FC<SuggestionsListProps> = ({suggestions,
+  inputValue,
+  onSelectSuggestion,
+  displaySuggestions,
+  selectedSuggestion}) => {
+ 
 
   if (inputValue && displaySuggestions) {
     if (suggestions.length > 0) {
