@@ -31,3 +31,5 @@ export const PAGINATION_HEADER = [
     name: "Time",
   },
 ];
+export const NO_RECORD_TODAY = 'No Records Entered Today'
+

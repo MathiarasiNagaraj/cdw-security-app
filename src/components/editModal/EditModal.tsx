@@ -4,9 +4,8 @@ import { EDIT } from "../../constants/modal-constants";
 import { Button } from "../button/Button";
 import { DeleteModal } from "../deleteModal/DeleteModal";
 import { editRecordForBranch, getAllRecordsByBranch } from "@/services/record";
-import { useRouter } from "next/router";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-
+import { useRecoilState } from "recoil";
+import { recentRecords } from "@/state/atom/Record";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,7 +38,7 @@ export const EditModal: React.FC<EditModalProps> = ({
   const [isDisable, setIsDisable] = useState(true);
   const [editedTemperature, setEditedTemperature] = useState<string>();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
- 
+  const [allRecords, setRecentRecords] = useRecoilState<any>(recentRecords);
   useEffect(() => {
     setEditedTemperature(temperature);
     setIsDeleteModalOpen(false);
@@ -52,9 +51,7 @@ export const EditModal: React.FC<EditModalProps> = ({
     setIsDisable(false);
   };
   const onUpdateHandler = async () => {
-    let allData = await getAllRecordsByBranch(branch);
-    allData = allData?.slice()?.reverse();
-    const index = allData?.findIndex(
+    const index = allRecords?.findIndex(
       (data:Array<string>) => data[0] === registerID && data[4] === date
     );
 
@@ -71,7 +68,10 @@ export const EditModal: React.FC<EditModalProps> = ({
     const status = await editRecordForBranch(data);
     if (status === 200) {
       setIsDisable(true);
-
+      const updatedData = [data.EmployeeID, data.EmployeeName, data.Temperature, data.Time, data.Date];
+      const newRecords = [...allRecords];
+      newRecords[index] = updatedData;
+      setRecentRecords(newRecords);
       toast.success(`Record ID-${registerID} Updated`, {
         position: toast.POSITION.TOP_CENTER,
       });

@@ -5,42 +5,38 @@ import { RecordTemperatureForm } from "../../components/recordTemperatureForm/Re
 import styles from "./RecordTemperatureContainer.module.scss";
 import { getRecordByBranchAndDate } from "@/services/record";
 import { getCurrentDate } from "@/utils/common-utils";
-import { CO_WORKERS, TODAY_RECORD } from "@/constants/commom-constants";
+import {
+  CO_WORKERS,
+  NO_RECORD_TODAY,
+  TODAY_RECORD,
+} from "@/constants/commom-constants";
 import { Record } from "@/components/record/Record";
 import Link from "next/link";
 import withAuth from "@/hoc/withAuth";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { usePathname } from "next/navigation";
+import { useRecoilState } from "recoil";
 import { recentRecords } from "@/state/atom/Record";
 const RecordTemperatureContainer = () => {
-  const [recentFiveRecords, setRecentRecords] = useRecoilState<any>(recentRecords);
-
-  const searchParams = useSearchParams();
+  const [allRecords, setRecentRecords] = useRecoilState<any>(recentRecords);
   const pathname = usePathname();
-
-
   const [isLoading, setiIsLoading] = useState(true);
   const branch = pathname.split("/")[1];
-
   const date = getCurrentDate();
-  const [data, setData] = useState<string[][]>([]);
   useEffect(() => {
     const getData = async () => {
       if (branch) {
         const data = await getRecordByBranchAndDate(branch, date);
-        setData(data);
-        console.log(data);
         setRecentRecords(data);
         setiIsLoading(false);
       }
     };
     getData();
-  }, [branch]);
+  }, [branch, allRecords?.length]);
 
-  const records = data
+  const records = allRecords
     ?.slice(0, 5)
-    .map((data, index) => (
+    .map((data: any, index: number) => (
       <Record
         key={index}
         id={index}
@@ -59,19 +55,21 @@ const RecordTemperatureContainer = () => {
         <>
           <div className={`${styles["co-workers"]} `}>
             {CO_WORKERS.title} <strong>{CO_WORKERS.country}</strong>
-            <p>{data?.length}</p>
+            <p>{allRecords?.length}</p>
           </div>
           <RecordTemperatureForm />
           <h4>{TODAY_RECORD.title}</h4>
 
-          {data?.length > 0 && (
+          {allRecords?.length > 0 && (
             <p>
-              {TODAY_RECORD.description(data?.length > 5 ? 5 : data?.length)}
+              {TODAY_RECORD.description(
+                allRecords?.length > 5 ? 5 : allRecords?.length
+              )}
             </p>
           )}
 
-          {data?.length <= 0 ? (
-            <h1 className={styles["fall-back"]}>No records entered today</h1>
+          {allRecords?.length <= 0 ? (
+            <h1 className={styles["fall-back"]}>{NO_RECORD_TODAY}</h1>
           ) : (
             <div className={styles["record-container"]}>{records}</div>
           )}

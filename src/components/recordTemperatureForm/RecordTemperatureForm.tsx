@@ -11,11 +11,10 @@ import { getCurrentDate, getCurrentTime } from "@/utils/common-utils";
 const source_sans_3 = Source_Sans_3({ subsets: ["latin"] });
 import { TEMPERATURE } from "@/constants/form-constants";
 import { employee } from "../../data/employee";
-import { addRecordForBranch, getCountByBranch, isEmployeeIDPresentToday ,getAllRecordsByBranch} from "../../services/record";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-
-import { Branch } from "@/components/branch/Branch";
+import { addRecordForBranch, isEmployeeIDPresentToday ,getAllRecordsByBranch} from "../../services/record";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { usePathname } from "next/navigation";
+import { recentRecords } from "@/state/atom/Record";
 
 
 interface Data {
@@ -26,15 +25,12 @@ export const RecordTemperatureForm = () => {
 
   const pathname = usePathname();
   const branch = pathname.split('/')[1];
-
-
+  const[recentAllRecords, setRecentRecords ]= useRecoilState(recentRecords);
   const [temperature, setTemperature] = useState<string>("");
   const [employeeID, setemployeeID] = useState<string>("");
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState<number>(0);
   const [displaySuggestions, setDisplaySuggestions] = useState<boolean>(false);
- 
-
   const suggestions = employee;
   const formRef = useRef<HTMLFormElement | null>(null);
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -82,12 +78,12 @@ export const RecordTemperatureForm = () => {
    
     
     if (employeeID === "" || temperature === "" ) {
-      toast.error(`Enter ${employeeID===""?'Employee ID':'temperature'}`, { position: toast.POSITION.BOTTOM_CENTER });
+      toast.error( TEMPERATURE.message.missing_fields(employeeID===""?'Employee ID':'temperature') , { position: toast.POSITION.BOTTOM_CENTER });
     }
     else if (isEmployeeIDPresentToday(data.EmployeeID)) {
-      //if (formRef.current) formRef.current.reset();
+      if (formRef.current) formRef.current.reset();
       setemployeeID("");
-      toast.error("EmployeeId already present in today's record ", { position: toast.POSITION.BOTTOM_CENTER });
+      toast.error(TEMPERATURE.message.already_present, { position: toast.POSITION.BOTTOM_CENTER });
     }
     else {
       const status =await  addRecordForBranch(data);
@@ -95,8 +91,11 @@ export const RecordTemperatureForm = () => {
       setemployeeID("");
 
       if (status === 200) {
-        //setCount((count) => count + 1);
-
+  
+        const records = [...(recentAllRecords) as string[][]];
+        const addedData = [data.EmployeeID, data.EmployeeName, data.Temperature, data.Time,data.Date];
+        const updatedRecords = [...records,addedData];
+        setRecentRecords(updatedRecords);
         toast.success("Record Added", { position: toast.POSITION.BOTTOM_CENTER });
       }
     }

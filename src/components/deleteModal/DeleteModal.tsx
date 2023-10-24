@@ -10,7 +10,8 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-
+import { useRecoilState } from "recoil";
+import { recentRecords } from "@/state/atom/Record";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useRouter } from "next/router";
 
@@ -31,25 +32,26 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
 }) => {
 
 
-
+  const [allRecords, setRecentRecords] = useRecoilState<any>(recentRecords);
   const onCloseModalHandler = () => {
     closeModal();
   };
 
   const onDeleteHandler = async () => {
-    let allData = await getAllRecordsByBranch(branch);
-    allData = allData?.slice()?.reverse();
-    const index = allData?.findIndex(
+
+    const dataIndex = allRecords?.findIndex(
       (data:Array<string>) => data[0] === registerID && data[4] === date
     );
     const data = {
-      range: index + 2,
+      range: dataIndex + 2,
       branch: branch,
     };
     const status = await deleteRecordForBranch(data);
 
+    const newRecords = allRecords.filter((_:any, index:number) => index !== dataIndex);;
+   
     if (status === 200) {
-     
+      setRecentRecords(newRecords);
       toast.success(`Record ID-${registerID} on ${date} Deleted `, {
         position: toast.POSITION.TOP_CENTER,
       });

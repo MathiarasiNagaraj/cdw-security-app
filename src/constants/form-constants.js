@@ -49,7 +49,14 @@ export const LOGIN = {
         type:'number'
       }
     ],
-    button:"Add Record"
+    button: "Add Record",
+    message: 
+      {
+        missing_fields:(data)=> {return `Enter ${data}`},
+        already_present: "EmployeeId already present in today's record ",
+        
+      }
+    
   }
 
   export const LOGIN_INFO = {
