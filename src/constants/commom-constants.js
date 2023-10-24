@@ -33,3 +33,4 @@ export const PAGINATION_HEADER = [
 ];
 export const NO_RECORD_TODAY = 'No Records Entered Today'
 
+export const NO_RECORDS= (date) => `No Records Found on ${date}`;
