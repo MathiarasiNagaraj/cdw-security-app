@@ -20,11 +20,14 @@ export async function GET(request: any,context: { params: any }) {
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: `${sheetName}`,
     });
-    
+    console.log(sheetName)
     if (response.data && response.data.values) {
+      console.log(response.data.values)
       return NextResponse.json({
         data: response.data.values,
+    
       });
+
     } else {
       return NextResponse.json({ data: [] });
     }
