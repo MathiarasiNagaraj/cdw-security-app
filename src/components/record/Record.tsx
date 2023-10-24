@@ -31,7 +31,7 @@ export const Record: React.FC<RecordProps> = ({
   };
   const pathname = usePathname();
   const branch = pathname.split('/')[1];
-  console.log(branch,'in record')
+
   return (
     <div
       className={` ${styles["record-box"]} ${styles["record-box"]}`}

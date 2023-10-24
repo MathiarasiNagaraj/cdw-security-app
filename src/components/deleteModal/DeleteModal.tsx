@@ -30,7 +30,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
   branch
 }) => {
 
-  console.log(branch,'branch in delet')
+
 
   const onCloseModalHandler = () => {
     closeModal();

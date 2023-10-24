@@ -12,7 +12,7 @@ import styles from './ViewRecordsContainer.module.scss'
 
     const [data, setData] = useState<string[][]>([]);
    const pathname = usePathname();
-    console.log(pathname.split('/')[1]);
+
     const [date,setDate] = useState(getCurrentDate());
 
    const [isLoading, setIsLoading] = useState(true);
@@ -33,12 +33,13 @@ import styles from './ViewRecordsContainer.module.scss'
       getData();
     }, [branch]);
     const onDataFilterHandler = async(data) => {
-   
+
       setIsLoading(true);
       if (branch) {
         setDate(data.date)
+
         const filterdata = await getRecordByBranchAndDateAndEmpID(branch, data.date, data.id);
-    
+       
         setData(filterdata);
         setIsLoading(false);
       }

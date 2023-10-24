@@ -6,6 +6,8 @@ import { formatDate } from "@/utils/common-utils";
 import React, { FormEvent, useRef, useState } from "react";
 import styles from "./FilterSidebar.module.scss";
 import { AiOutlineClose} from 'react-icons/ai';
+import { useRecoilState } from "recoil";
+import { sidebars, filterSidebar,} from "@/state/atom/Record";
 interface Data {
   identifier: string;
   value: string;
@@ -16,11 +18,24 @@ export const FilterSidebar = ({ isFilterOpen, onCloseFilter, branch ,onDataFilte
 
   const [date, setDate] = useState();
   const [name, setName] = useState();
-  const formRef =  useRef<HTMLFormElement | null>(null);
+  const [isSidebarOpen, setSidebarOpen] = useRecoilState(sidebars);
+  const [isFilterOpened, setFilterOpen] = useRecoilState(filterSidebar);
+  const formRef = useRef<HTMLFormElement | null>(null);
+  
   const sidebarClasses = [styles["sidebar-filter"]];
   if (isFilterOpen) {
     sidebarClasses.push(styles["active"]);
+    setFilterOpen(true);
+
   }
+
+  if (isSidebarOpen) {
+    const index = sidebarClasses.indexOf(styles["active"]);
+    if (index !== -1) {
+      sidebarClasses.splice(index, 1);
+    }
+}
+
   const onInputChangeHandler = (data:Data) => {
     if (data.identifier === "date") setDate(data.value);
     if (data.identifier === "text") setName(data.value);
@@ -37,6 +52,9 @@ export const FilterSidebar = ({ isFilterOpen, onCloseFilter, branch ,onDataFilte
       />
     </div>
   ));
+  const onCloseFilterHandler = () => {
+    onCloseFilter();
+  }
 
   const onSubmitHandler = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +63,7 @@ export const FilterSidebar = ({ isFilterOpen, onCloseFilter, branch ,onDataFilte
       date: formatDate(date),
       id:name
     }
-
+    
     onDataFilter(data);
     if (formRef.current) formRef.current.reset();
   };
@@ -56,7 +74,7 @@ export const FilterSidebar = ({ isFilterOpen, onCloseFilter, branch ,onDataFilte
       }`}
     >
       <div className={styles["wrapper"]}>
-        <AiOutlineClose onClick={onCloseFilter}/>
+        <AiOutlineClose onClick={onCloseFilterHandler}/>
 
         <h4>{SIDEBAR_FILTER.title}</h4>
         <form onSubmit={onSubmitHandler} ref={formRef}>

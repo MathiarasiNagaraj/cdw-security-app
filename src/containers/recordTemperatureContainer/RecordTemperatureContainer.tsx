@@ -18,7 +18,7 @@ const RecordTemperatureContainer = () => {
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  console.log(pathname.split("/"));
+
 
   const [isLoading, setiIsLoading] = useState(true);
   const branch = pathname.split("/")[1];
@@ -30,6 +30,7 @@ const RecordTemperatureContainer = () => {
       if (branch) {
         const data = await getRecordByBranchAndDate(branch, date);
         setData(data);
+      
         setRecentRecords(data);
         setiIsLoading(false);
       }

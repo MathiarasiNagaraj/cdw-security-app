@@ -8,6 +8,9 @@ import {BiFilterAlt,BiSolidUpArrow,BiSolidDownArrow} from "react-icons/bi"
 import { FilterSidebar } from "../filterSidebar/FilterSidebar";
 import { useRouter } from "next/navigation";
 import withAuth from "@/hoc/withAuth";
+import { useRecoilState } from "recoil";
+import { filterSidebar, sidebars } from "@/state/atom/Record";
+
 
 interface RecordPaginationProps {
   records: string[][];
@@ -25,7 +28,8 @@ interface RecordPaginationProps {
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(end);
   const router = useRouter();
-
+  const [isSidebarOpen, setSidebarOpen] = useRecoilState(sidebars);
+  const [isFilterOpened, setFilterOpen] = useRecoilState(filterSidebar);
   const branch ='Chennai';
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   useEffect(() => {
@@ -47,7 +51,12 @@ interface RecordPaginationProps {
   const onFilterOpenHandler = () => {
     setIsFilterOpen(true);
   }
-
+ 
+   const onFilterClose = () => {
+    setFilterOpen(false);
+     setIsFilterOpen(false); 
+   
+}
   return (
     <div className={` ${styles["view-record-wrapper"]}`}>
       <div className={` ${styles["date"]}`}>
@@ -56,7 +65,7 @@ interface RecordPaginationProps {
           <BiFilterAlt  />
           </div>
       </div>
-      <FilterSidebar isFilterOpen={isFilterOpen} onCloseFilter={() => { setIsFilterOpen(false) }} branch={branch} onDataFilter={ (data)=>{setFilteredData(data)}} />
+      <FilterSidebar isFilterOpen={isFilterOpen} onCloseFilter={onFilterClose} branch={branch} onDataFilter={ (data)=>{setFilteredData(data)}} />
       
       {
    
@@ -73,7 +82,7 @@ interface RecordPaginationProps {
             startIndex+1,
             endIndex,
            recordLength
-          ): `Showing ${endIndex} out of ${recordLength} records`}
+          ): `Showing ${endIndex} out of ${recordLength} ${(recordLength==1) ?`record`:`record`}`}
         </p>
         <div className={styles["btn-group"]}>
           <>

@@ -15,6 +15,7 @@ import { addRecordForBranch, getCountByBranch, isEmployeeIDPresentToday ,getAllR
 import { useSetRecoilState, useRecoilValue } from "recoil";
 
 import { Branch } from "@/components/branch/Branch";
+import { usePathname } from "next/navigation";
 
 
 interface Data {
@@ -23,7 +24,9 @@ interface Data {
 }
 export const RecordTemperatureForm = () => {
 
-  const branch = 'Chennai';
+  const pathname = usePathname();
+  const branch = pathname.split('/')[1];
+
 
   const [temperature, setTemperature] = useState<string>("");
   const [employeeID, setemployeeID] = useState<string>("");

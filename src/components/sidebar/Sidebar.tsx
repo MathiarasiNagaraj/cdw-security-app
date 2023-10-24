@@ -8,21 +8,39 @@ import Image from 'next/image';
 import { SIDEBAR_ROUTES, TOPBAR_ROUTE } from '../../constants/route-constants'
 import { usePathname, useSearchParams } from 'next/navigation';
 import withAuth from '@/hoc/withAuth';
-
+import { useRecoilState } from "recoil";
+import { filterSidebar, sidebars } from "@/state/atom/Record";
 
 
 const Sidebar = () => {
 
   const [sidebar, setSidebar] = useState(false);
   const pathname = usePathname();
-
+  const [isSidebarOpen, setSidebarOpen] = useRecoilState(sidebars);
+  const [isFilterOpen, setFilterOpen] = useRecoilState(filterSidebar);
   const location = pathname.split('/')[1];
-  const showSidebar = () => setSidebar(!sidebar);
-
+ 
+  const showSidebar = () => {
+    setSidebar(true);
+}
   const sidebarClasses = [styles['sidebar-nav']];
   if (sidebar) {
     sidebarClasses.push(styles['active']);
+    setSidebarOpen(true);
+  
   }
+
+  if (isFilterOpen) {
+    const index = sidebarClasses.indexOf(styles["active"]);
+    if (index !== -1) {
+      sidebarClasses.splice(index, 1);
+    }
+}
+  const closeSidebar = () => {
+    setSidebar(false);
+    setSidebarOpen(false);
+ }
+
   const routes = SIDEBAR_ROUTES.map((route) => <Link href={`${route.url(location)}`} key={route.name} className={styles['nav-items']}>{ route.name}</Link>)
 
   return (
@@ -40,7 +58,7 @@ const Sidebar = () => {
           <div className={styles['sidebar-wrapper']}>
             <div className={styles['text']}>
             <div  className={styles['nav-icon-close']}>
-               <AiOutlineClose onClick={showSidebar} />
+               <AiOutlineClose onClick={closeSidebar} />
             </div>
             <Link href="/">
           <Image className={styles['logo']} src='/images/cdwLogoWhite.png' alt='cdw-logo' height='70' width='125' />
@@ -60,4 +78,4 @@ const Sidebar = () => {
 };
 
 
-export default Sidebar;
+export default withAuth(Sidebar);

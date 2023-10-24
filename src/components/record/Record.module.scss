@@ -12,7 +12,7 @@
   flex-wrap: nowrap;
 
   .name {
-    width: 130px;
+    width: 125px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -20,5 +20,7 @@
   }
   .temperature {
     color: $green;
+    width: 50px;
+    text-align: center;
   }
 }

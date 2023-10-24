@@ -11,7 +11,6 @@ export const getAllRecordsByBranch = async(branch:string) => {
     });
 
     const recordStatus = await response.json();
-    console.log(recordStatus)
   let data = recordStatus.data;
   data?.shift();
   data = data?.slice().reverse();
@@ -22,7 +21,7 @@ export const getAllRecordsByBranch = async(branch:string) => {
 
 export const getRecordByBranchAndDate = async (branch:string, date:string) => {
     const data: string[][] = await getAllRecordsByBranch(branch); 
-    console.log(data)
+
 const  filteredData = data?.filter((data) => data[data?.length - 1] === date);
 
   currentDateRecords = filteredData;
@@ -31,6 +30,7 @@ const  filteredData = data?.filter((data) => data[data?.length - 1] === date);
 export const getRecordByBranchAndDateAndEmpID = async (branch:string, date:string, id:string) => {
   const data:string[][] =  await getAllRecordsByBranch(branch);
   let filteredData = [];
+
   filteredData = data?.filter((data) => (id ? data[data.length - 1] === date && data[0] === id : data[data.length - 1] === date));
 
   return filteredData;

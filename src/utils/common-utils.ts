@@ -39,7 +39,7 @@ export const getCurrentDate = () => {
   export const  formatDate=(inputDate:any)=> {
     const dateFormatOptions: Intl.DateTimeFormatOptions = {
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: '2-digit',
     };
     
