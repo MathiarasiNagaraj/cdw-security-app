@@ -9,7 +9,7 @@ export const SIDEBAR_ROUTES = [
 
 export const TOPBAR_ROUTE = (route) => {
     if (route === 'viewrecords') return 'TEMPERATURE RECORDS';
-    if (route === '[branch]') return 'RECORD TEMPERATURE';
+    if (route === 'Chennai'||'Bengaluru'||'Hyderabad') return 'RECORD TEMPERATURE';
         
     
 }

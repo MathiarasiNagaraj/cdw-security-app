@@ -18,8 +18,11 @@ const Sidebar = () => {
   const pathname = usePathname();
   const [isSidebarOpen, setSidebarOpen] = useRecoilState(sidebars);
   const [isFilterOpen, setFilterOpen] = useRecoilState(filterSidebar);
-  const location = pathname.split('/')[1];
- 
+  const paths = pathname.split('/');
+  const location = paths[1];
+  const route = paths[paths.length - 1];
+
+  const topbar = TOPBAR_ROUTE(route);
   const showSidebar = () => {
     setSidebar(true);
 }
@@ -51,7 +54,7 @@ const Sidebar = () => {
             <HiMiniBars3 onClick={showSidebar} />
    
           </div>
-        <h1>{''}</h1>
+        <h1>{topbar}</h1>
         </div>
     <div  className={styles['sidebarnav--wrapper']}>
         <nav  className={sidebarClasses.join(' ')} >
