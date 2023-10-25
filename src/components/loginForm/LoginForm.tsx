@@ -37,7 +37,7 @@ function LoginForm() {
 
     } else {
       toast.error(LOGIN.error_message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.BOTTOM_CENTER,
       });
     }
   };

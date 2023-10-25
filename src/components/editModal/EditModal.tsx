@@ -39,6 +39,7 @@ export const EditModal: React.FC<EditModalProps> = ({
   const [editedTemperature, setEditedTemperature] = useState<string>();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [allRecords, setRecentRecords] = useRecoilState<any>(recentRecords);
+  const [editStyleName, setEditStyleName] = useState('edit-btn');
   useEffect(() => {
     setEditedTemperature(temperature);
     setIsDeleteModalOpen(false);
@@ -54,7 +55,7 @@ export const EditModal: React.FC<EditModalProps> = ({
     const index = allRecords?.findIndex(
       (data:Array<string>) => data[0] === registerID && data[4] === date
     );
-
+    setEditStyleName('updating-btn');
     const data = {
       EmployeeID: registerID,
       EmployeeName: name,
@@ -75,6 +76,7 @@ export const EditModal: React.FC<EditModalProps> = ({
       toast.success(`Record ID-${registerID} Updated`, {
         position: toast.POSITION.TOP_CENTER,
       });
+      setEditStyleName('edit-btn');
     }
   };
   const onCloseDeleteModalHandler = () => {
@@ -117,7 +119,7 @@ export const EditModal: React.FC<EditModalProps> = ({
                   <Button
                     name={EDIT.update}
                     onClick={onUpdateHandler}
-                    styleName="edit-btn"
+                    styleName={editStyleName}
                   />
                 ) : (
                   <Button

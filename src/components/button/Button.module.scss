@@ -7,6 +7,14 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.primary-disable-btn{
+    cursor: not-allowed;
+    background-color: $grey;
+    color:$black;
+    border: none;
+    padding: 13px 80px;
+    border-radius: 5px;
+}
 .secondary-btn{
     background-color: $black;
     color:$white;
@@ -41,4 +49,13 @@
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
+}
+
+.updating-btn{
+    color:$blue;
+    background-color: $white;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: not-allowed
 }

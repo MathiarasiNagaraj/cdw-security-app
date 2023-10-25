@@ -1,5 +1,5 @@
 'use client';
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DeleteModal.module.scss";
 import { DELETE } from "@/constants/modal-constants";
 import { Button } from "../button/Button";
@@ -31,14 +31,14 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
   branch
 }) => {
 
-
+  const [deleteStyleName, setDeleteStyleName] = useState('edit-btn');
   const [allRecords, setRecentRecords] = useRecoilState<any>(recentRecords);
   const onCloseModalHandler = () => {
     closeModal();
   };
 
   const onDeleteHandler = async () => {
-
+    setDeleteStyleName('updating-btn');
     const dataIndex = allRecords?.findIndex(
       (data:Array<string>) => data[0] === registerID && data[4] === date
     );
@@ -51,10 +51,12 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
     const newRecords = allRecords.filter((_:any, index:number) => index !== dataIndex);;
    
     if (status === 200) {
+      setDeleteStyleName('edit-btn');
       setRecentRecords(newRecords);
       toast.success(`Record ID-${registerID} on ${date} Deleted `, {
         position: toast.POSITION.TOP_CENTER,
       });
+
       closeModal();
     }
   };
@@ -77,7 +79,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
         <Button
           name={DELETE.delete}
           onClick={onDeleteHandler}
-          styleName="edit-btn"
+          styleName={deleteStyleName}
         />
       </div>
     </div>

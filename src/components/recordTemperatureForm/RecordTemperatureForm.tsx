@@ -28,6 +28,7 @@ export const RecordTemperatureForm = () => {
   const[recentAllRecords, setRecentRecords ]= useRecoilState(recentRecords);
   const [temperature, setTemperature] = useState<string>("");
   const [employeeID, setemployeeID] = useState<string>("");
+  const [addStyleName, setStyleName] = useState('primary-btn');
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState<number>(0);
   const [displaySuggestions, setDisplaySuggestions] = useState<boolean>(false);
@@ -65,7 +66,7 @@ export const RecordTemperatureForm = () => {
 
   const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   
+    setStyleName('primary-disable-btn');
     const data = {
       EmployeeID: employeeID?.split("-")[0],
       EmployeeName:employeeID?.split("-")[1],
@@ -97,6 +98,7 @@ export const RecordTemperatureForm = () => {
         const updatedRecords = [...records,addedData];
         setRecentRecords(updatedRecords);
         toast.success("Record Added", { position: toast.POSITION.BOTTOM_CENTER });
+        setStyleName('primary-btn');
       }
     }
   };
@@ -138,7 +140,7 @@ export const RecordTemperatureForm = () => {
         suggestions={filteredSuggestions}
       />
       {fields}
-      <Button name={TEMPERATURE.button} styleName="primary-btn" onClick={()=>{}} />
+      <Button name={TEMPERATURE.button} styleName={addStyleName} onClick={()=>{}} />
     </form>
   );
 };

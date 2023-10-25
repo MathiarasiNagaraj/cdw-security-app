@@ -60,6 +60,6 @@ export const LOGIN = {
   }
 
   export const LOGIN_INFO = {
-    email: 'mathiarasi@gmail.com',
-    password:'Mathi@2002'
+    email: 'nijin.vinodan@cdw.com',
+    password:'Nijin@cdw'
 }
