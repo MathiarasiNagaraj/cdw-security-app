@@ -79,11 +79,13 @@ export const RecordTemperatureForm = () => {
    
     
     if (employeeID === "" || temperature === "" ) {
-      toast.error( TEMPERATURE.message.missing_fields(employeeID===""?'Employee ID':'temperature') , { position: toast.POSITION.BOTTOM_CENTER });
+      toast.error(TEMPERATURE.message.missing_fields(employeeID === "" ? 'Employee ID' : 'temperature'), { position: toast.POSITION.BOTTOM_CENTER });
+      setStyleName('primary-btn');
     }
     else if (isEmployeeIDPresentToday(data.EmployeeID)) {
       if (formRef.current) formRef.current.reset();
       setemployeeID("");
+      setStyleName('primary-btn');
       toast.error(TEMPERATURE.message.already_present, { position: toast.POSITION.BOTTOM_CENTER });
     }
     else {

@@ -52,7 +52,9 @@ export const EditModal: React.FC<EditModalProps> = ({
     setIsDisable(false);
   };
   const onUpdateHandler = async () => {
-    const index = allRecords?.findIndex(
+    let allData = await getAllRecordsByBranch(branch);
+    allData = allData?.slice()?.reverse();
+    const index = allData?.findIndex(
       (data:Array<string>) => data[0] === registerID && data[4] === date
     );
     setEditStyleName('updating-btn');

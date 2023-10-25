@@ -39,7 +39,9 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
 
   const onDeleteHandler = async () => {
     setDeleteStyleName('updating-btn');
-    const dataIndex = allRecords?.findIndex(
+    let allData = await getAllRecordsByBranch(branch);
+    allData = allData?.slice()?.reverse();
+    const dataIndex = allData?.findIndex(
       (data:Array<string>) => data[0] === registerID && data[4] === date
     );
     const data = {
