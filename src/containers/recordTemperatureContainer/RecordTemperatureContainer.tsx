@@ -32,7 +32,7 @@ const RecordTemperatureContainer = () => {
       }
     };
     getData();
-  }, [branch, allRecords?.length]);
+  }, [branch]);
 
   const records = allRecords
     ?.slice(0, 5)

@@ -6,12 +6,13 @@ import {
   getRecordByBranchAndDateAndEmpID,
 } from "@/services/record";
 import { getCurrentDate } from "@/utils/common-utils";
-import { usePathname, useSearchParams } from "next/navigation";
+import {usePathname} from "next/navigation";
 import { useRecoilState } from "recoil";
 import { recentRecords } from "@/state/atom/Record";
 import React, { useState, useEffect } from "react";
 import RecordPagination from "../../components/recordPagination/RecordPagination";
 import styles from "./ViewRecordsContainer.module.scss";
+
 const ViewRecordsContainer = () => {
 
   const pathname = usePathname();
@@ -33,7 +34,6 @@ const ViewRecordsContainer = () => {
     setIsLoading(true);
     if (branch) {
       setDate(data.date);
-
       const filterdata = await getRecordByBranchAndDateAndEmpID(
         branch,
         data.date,
