@@ -33,7 +33,7 @@ function LoginForm() {
     e.preventDefault();
     if (email === LOGIN_INFO.email && password === LOGIN_INFO.password) {
       localStorage.setItem("isLoggedIn", JSON.stringify(true));
-      router.push("/location");
+      router.push("/locations");
 
     } else {
       toast.error(LOGIN.error_message, {
