@@ -39,8 +39,10 @@ const ViewRecordsContainer = () => {
         data.date,
         data.id
       );
-
-      setRecentRecords(filterdata);
+      console.log(filterdata);
+      const newfiltredRecords = [...filterdata];
+      setRecentRecords(newfiltredRecords);
+      console.log(allRecords);
       setIsLoading(false);
     }
   };

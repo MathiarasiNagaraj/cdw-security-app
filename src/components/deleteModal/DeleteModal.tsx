@@ -50,9 +50,13 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
     };
     const status = await deleteRecordForBranch(data);
 
-    const newRecords = allRecords.filter((_:any, index:number) => index !== dataIndex);;
+   
    
     if (status === 200) {
+      const recoilindex=allRecords?.findIndex(
+        (data:Array<string>) => data[0] === registerID && data[4] === date
+      );
+      const newRecords = allRecords.filter((_:any, index:number) => index !== recoilindex);;
       setDeleteStyleName('edit-btn');
       setRecentRecords(newRecords);
       toast.success(`Record ID-${registerID} on ${date} Deleted `, {
