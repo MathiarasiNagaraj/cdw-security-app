@@ -19,7 +19,8 @@ export const Input: React.FC<InputProps> = ({ type, placeholder, styleName, onCh
   return (
     <input
     type={type}
-    placeholder={placeholder}
+      placeholder={placeholder}
+      step={"0.01"}
     className={`${styles[styleName]} ${source_sans_3.className}`}
     onChange={(e) => {
       const value = e.target.value;
