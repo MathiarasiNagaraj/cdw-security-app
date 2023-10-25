@@ -53,7 +53,7 @@ export const LOGIN = {
     message: 
       {
         missing_fields:(data)=> {return `Enter ${data}`},
-        already_present: "EmployeeId already present in today's record ",
+        already_present: "Co-Worker details  already present in today's record ",
         
       }
     

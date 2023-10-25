@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 
 import RecoilContextProvider from "@/state/root/RecoilRootProvider";
 
-import { Source_Sans_3 } from 'next/font/google';
-const source_sans_3 = Source_Sans_3({ subsets: ['latin'] });
+import { Source_Sans_3 } from "next/font/google";
+const source_sans_3 = Source_Sans_3({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CDW Security App",
@@ -18,11 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      
       <body className={source_sans_3.className}>
-        <RecoilContextProvider>
-        {children}
-        </RecoilContextProvider>
+        <RecoilContextProvider>{children}</RecoilContextProvider>
       </body>
     </html>
   );

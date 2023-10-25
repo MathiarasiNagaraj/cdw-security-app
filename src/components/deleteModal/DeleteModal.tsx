@@ -53,15 +53,16 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
    
    
     if (status === 200) {
+      toast.success(`Record ID-${registerID} on ${date} Deleted `, {
+        position: toast.POSITION.TOP_CENTER,
+      });
       const recoilindex=allRecords?.findIndex(
         (data:Array<string>) => data[0] === registerID && data[4] === date
       );
       const newRecords = allRecords.filter((_:any, index:number) => index !== recoilindex);;
       setDeleteStyleName('edit-btn');
       setRecentRecords(newRecords);
-      toast.success(`Record ID-${registerID} on ${date} Deleted `, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+     
 
       closeModal();
     }

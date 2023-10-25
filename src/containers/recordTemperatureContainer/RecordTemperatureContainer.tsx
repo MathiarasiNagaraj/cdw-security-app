@@ -34,7 +34,7 @@ const RecordTemperatureContainer = () => {
     getData();
   }, [branch]);
 
-  const records = allRecords
+  const records = allRecords?.slice()?.reverse()
     ?.slice(0, 5)
     .map((data: any, index: number) => (
       <Record

@@ -53,7 +53,7 @@ export const FilterSidebar : React.FC<FilterSidebarProps> =  ({ isFilterOpen, on
         type={field.type}
         max={new Date().toISOString().split('T')[0]}
         onChange={onInputChangeHandler}
-        placeholder=''
+        placeholder={field.placeholder}
       />
     </div>
   ));

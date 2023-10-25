@@ -77,8 +77,7 @@ export const EditModal: React.FC<EditModalProps> = ({
       const updatedData = [data.EmployeeID, data.EmployeeName, data.Temperature, data.Time, data.Date];
       const newRecords = [...allRecords];
       newRecords[index] = updatedData;
-      console.log(allRecords);
-      console.log(newRecords);
+   
       setRecentRecords(newRecords);
       toast.success(`Record ID-${registerID} Updated`, {
         position: toast.POSITION.TOP_CENTER,

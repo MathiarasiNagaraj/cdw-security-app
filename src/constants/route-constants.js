@@ -4,8 +4,8 @@ export const SIDEBAR_ROUTES = [
     url: (location) => `/${location}/`,
   },
   { name: "RECORD TEMPERATURE", url: (location) => `/${location}/` },
-    { name: "SWITCH OFFICE", url: (location) => "/locations" },
-    { name: "SIGN OUT" , url: (location) => "/"}
+  { name: "SWITCH OFFICE", url: (location) => "/locations" },
+  { name: "SIGN OUT", url: (location) => "/" },
 ];
 
 export const TOPBAR_ROUTE = (route) => {
@@ -21,11 +21,13 @@ export const SIDEBAR_FILTER = {
       label: "Select Date",
       type: "date",
       styleName: "filter-input",
+      placeholder: "Date",
     },
     {
       label: "Filter By Co-worker",
-      type: "text",
+      type: "number",
       styleName: "filter-input",
+      placeholder: "Co-worker ID",
     },
   ],
   button: {

@@ -7,7 +7,7 @@ interface ButtonProps {
   styleName: string;
   onClick: () => void;
 }
-export const Button: React.FC<ButtonProps> = ({ name, styleName,onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ name, styleName, onClick }) => {
   return (
     <button className={` ${styles[styleName]}`} onClick={onClick}>
       {name}
@@ -18,5 +18,5 @@ export const Button: React.FC<ButtonProps> = ({ name, styleName,onClick }) => {
 Button.propTypes = {
   name: PropType.string.isRequired,
   styleName: PropType.string.isRequired,
-  onClick: PropType.func.isRequired
-}
+  onClick: PropType.func.isRequired,
+};

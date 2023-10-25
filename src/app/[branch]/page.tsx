@@ -1,15 +1,9 @@
-import  RecordTemperatureContainer  from '@/containers/recordTemperatureContainer/RecordTemperatureContainer';
+import RecordTemperatureContainer from "@/containers/recordTemperatureContainer/RecordTemperatureContainer";
 
-import React from 'react'
+import React from "react";
 
 const page = () => {
-   
-  return (
+  return <RecordTemperatureContainer />;
+};
 
- <RecordTemperatureContainer/> 
-   
-
-  )
-}
-
-export default page
+export default page;
