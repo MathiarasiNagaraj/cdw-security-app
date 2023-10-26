@@ -27,7 +27,7 @@ function LoginForm() {
   }, [router]);
   const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
-    if (email === LOGIN_INFO.email && password === LOGIN_INFO.password) {
+    if (LOGIN_INFO.email.includes(email) && password === LOGIN_INFO.password) {
       localStorage.setItem("isLoggedIn", JSON.stringify(true));
       router.push("/locations");
     } else {

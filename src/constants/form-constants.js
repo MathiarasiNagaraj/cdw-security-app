@@ -62,6 +62,6 @@ export const LOGIN = {
   }
 
   export const LOGIN_INFO = {
-    email: 'nijin.vinodan@cdw.com',
-    password:'Nijin@cdw'
+    email: ['nijin.vinodan@cdw.com','ravi.vungarala@cdw.com'],
+    password:'Welcome@123'
 }
