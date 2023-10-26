@@ -1,0 +1,11 @@
+@import "../../styles/index.module.scss";
+.dashboard-wrapper {
+  @include flex($direction: column,$gap:20px);
+  background-color: $light-grey;
+  padding: 50px 30px;
+  height: 100vh;
+  .count-box{
+    @include flex($direction: column,$gap:10px);
+  }
+
+}

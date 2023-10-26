@@ -3,6 +3,13 @@ import Image from "next/image";
 import React from "react";
 import styles from "./HomeContainer.module.scss";
 import { TITLE } from "@/constants/commom-constants";
+
+/**
+ * @description Home container that will display as home page 
+ * @author [Mathiarasi]
+ * @returns function will return the loginform
+ */
+
 export const HomeContainer = () => {
   return (
     <div className={`${styles["index-wrapper"]}`}>

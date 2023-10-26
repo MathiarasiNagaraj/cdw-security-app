@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useState } from "react";
 import styles from "./DeleteModal.module.scss";
 import { DELETE } from "@/constants/modal-constants";
@@ -9,40 +9,47 @@ import {
 } from "@/services/record";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSetRecoilState, useRecoilValue } from "recoil";
 import { useRecoilState } from "recoil";
 import { recentRecords } from "@/state/atom/Record";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { useRouter } from "next/router";
 
 interface DeleteModalProps {
   closeDeleteModal: () => void;
   closeModal: () => void;
   registerID: string;
   date: string;
-  branch:string
+  branch: string;
 }
+
+/**
+ * @description A Modal component for delete
+ * @author [Mathiarasi]
+ * @returns  function will return Delete Modal component
+ */
 
 export const DeleteModal: React.FC<DeleteModalProps> = ({
   closeDeleteModal,
   closeModal,
   registerID,
   date,
-  branch
+  branch,
 }) => {
-
-  const [deleteStyleName, setDeleteStyleName] = useState('edit-btn');
+  const [deleteStyleName, setDeleteStyleName] = useState("edit-btn");
   const [allRecords, setRecentRecords] = useRecoilState<any>(recentRecords);
+
+  //on modal closing
   const onCloseModalHandler = () => {
     closeModal();
   };
 
+  //on clicking delete
   const onDeleteHandler = async () => {
-    setDeleteStyleName('updating-btn');
+    setDeleteStyleName("updating-btn");
+    //fetching record index from all the records
     let allData = await getAllRecordsByBranch(branch);
     allData = allData?.slice()?.reverse();
     const dataIndex = allData?.findIndex(
-      (data:Array<string>) => data[0] === registerID && data[4] === date
+      (data: Array<string>) => data[0] === registerID && data[4] === date
     );
     const data = {
       range: dataIndex + 2,
@@ -50,20 +57,21 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
     };
     const status = await deleteRecordForBranch(data);
 
-   
-   
+    //if the status is successfull then display success toast  component
+    //update recoil
+    // close the modal
     if (status === 200) {
       toast.success(`Record ID-${registerID} on ${date} Deleted `, {
         position: toast.POSITION.TOP_CENTER,
       });
-      const recoilindex=allRecords?.findIndex(
-        (data:Array<string>) => data[0] === registerID && data[4] === date
+      const recoilindex = allRecords?.findIndex(
+        (data: Array<string>) => data[0] === registerID && data[4] === date
       );
-      const newRecords = allRecords.filter((_:any, index:number) => index !== recoilindex);;
-      setDeleteStyleName('edit-btn');
+      const newRecords = allRecords.filter(
+        (_: any, index: number) => index !== recoilindex
+      );
+      setDeleteStyleName("edit-btn");
       setRecentRecords(newRecords);
-     
-
       closeModal();
     }
   };
@@ -73,7 +81,9 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
       onClick={(e) => e.stopPropagation()}
     >
       <ToastContainer />
-     <span  onClick={onCloseModalHandler}><AiOutlineCloseCircle /></span> 
+      <span onClick={onCloseModalHandler}>
+        <AiOutlineCloseCircle />
+      </span>
       <h1> {DELETE.title}</h1>
       <h5> {DELETE.description}</h5>
       <div className={styles["button-wrapper"]}>

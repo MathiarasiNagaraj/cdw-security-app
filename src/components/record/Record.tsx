@@ -4,7 +4,6 @@ import styles from "./Record.module.scss";
 import PropType from "prop-types";
 import { EditModal } from "../editModal/EditModal";
 import { usePathname } from "next/navigation";
-
 interface RecordProps {
   registerID: string;
   name: string;
@@ -13,6 +12,12 @@ interface RecordProps {
   date: string;
   id: number;
 }
+/**
+ * @description A reusable Record component 
+ * @author [Mathiarasi]
+ * @returns  function will return Record component
+ */
+
 export const Record: React.FC<RecordProps> = ({
   id,
   registerID,

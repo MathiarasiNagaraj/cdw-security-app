@@ -1,6 +1,12 @@
 import React from "react";
 import Sidebar from "@/components/sidebar/Sidebar";
 
+/**
+ * @description A layout for branch  with fixed sidebar
+ * @author [Mathiarasi]
+ * @returns function will return the layout of all page with sidebar
+ */
+
 export default function Branchlayout({
   children,
 }: {
@@ -9,7 +15,6 @@ export default function Branchlayout({
   return (
     <div>
       <Sidebar />
-
       {children}
     </div>
   );

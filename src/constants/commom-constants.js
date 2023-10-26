@@ -1,3 +1,5 @@
+import { toTitleCase } from "@/utils/common-utils";
+
 export const TITLE = "SECURITY APP";
 export const TODAY_RECORD = {
   title: "Today's Record",
@@ -6,7 +8,7 @@ export const TODAY_RECORD = {
 };
 export const CO_WORKERS = {
   title: "Co-Workers",
-  country: "IN",
+  subtitle: (branch) => `in ${toTitleCase(branch)} Office`,
 };
 export const VIEW_RECORDS = {
   title: (date) => {
@@ -31,6 +33,10 @@ export const PAGINATION_HEADER = [
     name: "Time",
   },
 ];
-export const NO_RECORD_TODAY = 'No Records Entered Today'
+export const NO_RECORD_TODAY = "No Records Entered Today";
 
-export const NO_RECORDS= (date) => `No Records Found on ${date}`;
+export const NO_RECORDS = (date) => `No Records Found on ${date}`;
+
+export const COUNT = "TODAY'S CO-WORKERS COUNT ";
+
+export const NO_SUGGESTION="No suggestions available..."

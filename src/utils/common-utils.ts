@@ -44,7 +44,13 @@ export const getCurrentDate = () => {
     };
     
     const formattedDate = new Date(inputDate).toLocaleDateString(undefined, dateFormatOptions);
-    return formattedDate;
+
+    
+    // Replace hyphens with spaces and update formattedDate
+    const formattedDateWithSpaces = formattedDate.replace(/-/g, ' ');
+   
+    
+    return formattedDateWithSpaces;
   }
   
   
@@ -73,4 +79,10 @@ export const getCurrentDate = () => {
     const timeA = convertTimeToSortableFormat(a[3]);
     const timeB = convertTimeToSortableFormat(b[3]);
     return timeB.localeCompare(timeA);
+  }
+
+  export function toTitleCase(input:string) {
+    return input.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
   }

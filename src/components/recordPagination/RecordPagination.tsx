@@ -3,7 +3,7 @@ import { NO_RECORDS, VIEW_RECORDS } from "@/constants/commom-constants";
 import React, { useState, useEffect } from "react";
 import styles from "./RecordPagination.module.scss";
 import { RecordContainer } from "../recordContainer/RecordContainer";
-import { BiFilterAlt, BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
+import { BiFilterAlt} from "react-icons/bi";
 import { FilterSidebar } from "../filterSidebar/FilterSidebar";
 import withAuth from "@/hoc/withAuth";
 import { useRecoilState } from "recoil";
@@ -14,6 +14,12 @@ interface RecordPaginationProps {
   date: string;
   setFilteredData: (data: any) => void;
 }
+
+/**
+ * @description A pagination component for records
+ * @author [Mathiarasi]
+ * @returns  function will return record pagination
+ */
 
 const RecordPagination: React.FC<RecordPaginationProps> = ({
   records,
@@ -72,7 +78,7 @@ const RecordPagination: React.FC<RecordPaginationProps> = ({
 
       {recordLength == 0 ? (
         <div className={styles["fallback"]}>
-          <h1>{NO_RECORDS(date) }</h1>
+          <h1>{NO_RECORDS(date)}</h1>
         </div>
       ) : (
         <>

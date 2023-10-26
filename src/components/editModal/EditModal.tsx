@@ -12,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 interface EditModalProps {
   isOpen: boolean;
   closeModal: () => void;
-
   registerID: string;
   name: string;
   temperature: string;
@@ -21,6 +20,12 @@ interface EditModalProps {
   id:number;
   branch: string;
 }
+/**
+ * @description A Modal component for Edit
+ * @author [Mathiarasi]
+ * @returns  function will return Edit Modal component
+ */
+
 export const EditModal: React.FC<EditModalProps> = ({
   isOpen,
   closeModal,
@@ -32,25 +37,28 @@ export const EditModal: React.FC<EditModalProps> = ({
   date,
   branch
 }) => {
-
-
-
   const [isDisable, setIsDisable] = useState(true);
   const [editedTemperature, setEditedTemperature] = useState<string>();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [allRecords, setRecentRecords] = useRecoilState<any>(recentRecords);
   const [editStyleName, setEditStyleName] = useState('edit-btn');
+  //when temperature change (input prop) need to set the states to default value and set temperature to editedTemperature state
   useEffect(() => {
     setEditedTemperature(temperature);
     setIsDeleteModalOpen(false);
     setIsDisable(true);
   }, [temperature]);
+
+  //on clicking delete record ,opening delete modal
   const onDeleteHandler = () => {
     setIsDeleteModalOpen(true);
   };
+    //on clicking  edit  ,enable the temperature input
   const onEditHandler = () => {
     setIsDisable(false);
   };
+
+  //on clicking update
   const onUpdateHandler = async () => {
     let allData = await getAllRecordsByBranch(branch);
     allData = allData?.slice()?.reverse();
@@ -67,8 +75,10 @@ export const EditModal: React.FC<EditModalProps> = ({
       branch: branch,
       range: index + 2,
     };
-
     const status = await editRecordForBranch(data);
+    //if the status is successfull then display success toast  component
+    //update recoil
+    // close the modal
     if (status === 200) {
       setIsDisable(true);
       const index=allRecords?.findIndex(
@@ -85,9 +95,11 @@ export const EditModal: React.FC<EditModalProps> = ({
       setEditStyleName('edit-btn');
     }
   };
+  //on closing delete modal (prop from child)
   const onCloseDeleteModalHandler = () => {
     setIsDeleteModalOpen(false);
   };
+  //on closing modal
   const onCloseModalHandler = () => {
     closeModal();
   };

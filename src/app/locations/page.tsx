@@ -1,6 +1,10 @@
 import Locations from "@/containers/locationContainer/LocationContainer";
 
-import React from "react";
+/**
+ * @description index page for location route
+ * @author [Mathiarasi]
+ * @returns function will return the location form
+ */
 
 const page = () => {
   return (

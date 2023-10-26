@@ -11,24 +11,31 @@ import { getCurrentDate, getCurrentTime } from "@/utils/common-utils";
 const source_sans_3 = Source_Sans_3({ subsets: ["latin"] });
 import { TEMPERATURE } from "@/constants/form-constants";
 import { employee } from "../../data/employee";
-import { addRecordForBranch, isEmployeeIDPresentToday ,getAllRecordsByBranch} from "../../services/record";
-import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  addRecordForBranch,
+  isEmployeeIDPresentToday,
+} from "../../services/record";
+import { useRecoilState } from "recoil";
 import { usePathname } from "next/navigation";
 import { recentRecords } from "@/state/atom/Record";
-
 
 interface Data {
   identifier: string;
   value: string;
 }
-export const RecordTemperatureForm = () => {
+/**
+ * @description A RecordTemperatureForm component for temperature form
+ * @author [Mathiarasi]
+ * @returns  function will return temperature form
+ */
 
+export const RecordTemperatureForm = () => {
   const pathname = usePathname();
-  const branch = pathname.split('/')[1];
-  const[recentAllRecords, setRecentRecords ]= useRecoilState(recentRecords);
+  const branch = pathname.split("/")[1];
+  const [recentAllRecords, setRecentRecords] = useRecoilState(recentRecords);
   const [temperature, setTemperature] = useState<string>("");
   const [employeeID, setemployeeID] = useState<string>("");
-  const [addStyleName, setStyleName] = useState('primary-btn');
+  const [addStyleName, setStyleName] = useState("primary-btn");
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState<number>(0);
   const [displaySuggestions, setDisplaySuggestions] = useState<boolean>(false);
@@ -54,53 +61,64 @@ export const RecordTemperatureForm = () => {
   };
 
   const onInputChangeHandler = (data: Data) => {
-    if (data.identifier === "number")
+    if (data.identifier === "number") {
       if (parseInt(data.value) > 99) {
         toast.error("High temperature!", {
           position: toast.POSITION.BOTTOM_CENTER,
           autoClose: 3000,
         });
       }
+    }
     setTemperature(data.value);
   };
 
   const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStyleName('primary-disable-btn');
+    setStyleName("primary-disable-btn");
     const data = {
       EmployeeID: employeeID?.split("-")[0],
-      EmployeeName:employeeID?.split("-")[1],
+      EmployeeName: employeeID?.split("-")[1],
       Temperature: temperature,
       Time: getCurrentTime(),
       Date: getCurrentDate(),
       branch: branch,
     };
 
-   
-    
-    if (employeeID === "" || temperature === "" ) {
-      toast.error(TEMPERATURE.message.missing_fields(employeeID === "" ? 'Employee ID' : 'temperature'), { position: toast.POSITION.BOTTOM_CENTER });
-      setStyleName('primary-btn');
-    }
-    else if (isEmployeeIDPresentToday(data.EmployeeID)) {
+    if (employeeID === "" || temperature === "") {
+      toast.error(
+        TEMPERATURE.message.missing_fields(
+          employeeID === "" ? "Co-worker ID" : "temperature"
+        ),
+        { position: toast.POSITION.BOTTOM_CENTER }
+      );
+      setStyleName("primary-btn");
+    } else if (isEmployeeIDPresentToday(data.EmployeeID)) {
       if (formRef.current) formRef.current.reset();
       setemployeeID("");
-      setStyleName('primary-btn');
-      toast.error(TEMPERATURE.message.already_present, { position: toast.POSITION.BOTTOM_CENTER });
-    }
-    else {
-      const status =await  addRecordForBranch(data);
+      setStyleName("primary-btn");
+      toast.error(TEMPERATURE.message.already_present, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    } else {
+      const status = await addRecordForBranch(data);
       if (formRef.current) formRef.current.reset();
       setemployeeID("");
 
       if (status === 200) {
-  
-        const records = [...(recentAllRecords) as string[][]];
-        const addedData = [data.EmployeeID, data.EmployeeName, data.Temperature, data.Time,data.Date];
-        const updatedRecords = [...records,addedData];
+        const records = [...(recentAllRecords as string[][])];
+        const addedData = [
+          data.EmployeeID,
+          data.EmployeeName,
+          data.Temperature,
+          data.Time,
+          data.Date,
+        ];
+        const updatedRecords = [...records, addedData];
         setRecentRecords(updatedRecords);
-        toast.success("Record Added", { position: toast.POSITION.BOTTOM_CENTER });
-        setStyleName('primary-btn');
+        toast.success("Record Added", {
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+        setStyleName("primary-btn");
       }
     }
   };
@@ -111,7 +129,8 @@ export const RecordTemperatureForm = () => {
       styleName={field.style}
       key={field.type}
       type={field.type}
-      max=''
+      max={field.max}
+      min={field.min}
       onChange={onInputChangeHandler}
     />
   ));
@@ -123,7 +142,7 @@ export const RecordTemperatureForm = () => {
       ref={formRef}
     >
       <div className={styles["toast-container"]}>
-        <ToastContainer  transition={Zoom} autoClose={2000} />
+        <ToastContainer transition={Zoom} autoClose={2000} />
       </div>
       <h3>{TEMPERATURE.title}</h3>
       <input
@@ -131,7 +150,7 @@ export const RecordTemperatureForm = () => {
         type="text"
         onChange={onChange}
         value={employeeID}
-        placeholder={"Employee ID"}
+        placeholder={"Co-worker ID"}
       />
 
       <SuggestionsList
@@ -142,7 +161,11 @@ export const RecordTemperatureForm = () => {
         suggestions={filteredSuggestions}
       />
       {fields}
-      <Button name={TEMPERATURE.button} styleName={addStyleName} onClick={()=>{}} />
+      <Button
+        name={TEMPERATURE.button}
+        styleName={addStyleName}
+        onClick={() => {}}
+      />
     </form>
   );
 };

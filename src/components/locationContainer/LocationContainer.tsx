@@ -8,6 +8,7 @@ import styles from "./LocationContainer.module.scss";
  * @author Mathiarasi
  * @returns branch components
  */
+
 export const LocationContainer = () => {
   const branch = LOCATION.branch.map((branch) => (
     <Branch

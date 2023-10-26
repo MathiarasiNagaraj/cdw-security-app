@@ -1,15 +1,12 @@
-
-import Dashboard from "@/containers/dashboardContainer/Dashboard";
 import RecordTemperatureContainer from "@/containers/recordTemperatureContainer/RecordTemperatureContainer";
-
+import React from "react";
 /**
- * @description index page for branch route
+ * @description index page for recordTemperature route
  * @author [Mathiarasi]
  * @returns function will return the RecordTemperatureContainer
  */
 
 const page = () => {
-  return <Dashboard/>
+  return <RecordTemperatureContainer />;
 };
-
 export default page;

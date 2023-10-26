@@ -1,0 +1,24 @@
+@import "../../styles/index.module.scss";
+.location-box{
+    @include flex(
+    $alignItems: center,
+    $justifyContent: space-between,
+
+    
+  );
+  background-color: $white;
+  color:$black;
+  padding: 8px 12px;
+  font-size: 12px;
+  width: 365px;
+  flex-wrap: nowrap;
+  .branch-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
+  .image-box{
+    background-color: $dark-red;
+  }
+}
+}

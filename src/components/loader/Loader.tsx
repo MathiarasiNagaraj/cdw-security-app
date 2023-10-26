@@ -1,6 +1,12 @@
 import React from "react";
 import { ThreeDots } from "react-loader-spinner";
 import styles from "./Loader.module.scss";
+/**
+ * @description A loader component
+ * @author [Mathiarasi]
+ * @returns  function will return loader component
+ */
+
 const Loader = () => {
   return (
     <div className={styles["loader-wrapper"]}>

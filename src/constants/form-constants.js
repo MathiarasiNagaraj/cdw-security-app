@@ -46,7 +46,9 @@ export const LOGIN = {
       {
         placeholder: 'Temperature (F)',
         style: 'border-less-input',
-        type:'number'
+        type: 'number',
+        max:99,
+        min:97.00
       }
     ],
     button: "Add Record",

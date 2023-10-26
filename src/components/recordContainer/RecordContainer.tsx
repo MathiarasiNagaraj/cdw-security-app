@@ -2,15 +2,23 @@ import { Record } from "@/components/record/Record";
 import React, { useEffect, useState } from "react";
 import styles from "./RecordContainer.module.scss";
 import PropType from "prop-types";
-import {  BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
+import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import { PAGINATION_HEADER } from "@/constants/commom-constants";
-import {customAscendingSort,customDescendingSort} from "@/utils/common-utils";
+import {
+  customAscendingSort,
+  customDescendingSort,
+} from "@/utils/common-utils";
 
 interface RecordContainerProps {
   start: number;
   end: number;
   records: string[][];
 }
+/**
+ * @description A container component for records
+ * @author [Mathiarasi]
+ * @returns  function will return record container component
+ */
 
 export const RecordContainer: React.FC<RecordContainerProps> = ({
   start,
@@ -29,12 +37,12 @@ export const RecordContainer: React.FC<RecordContainerProps> = ({
     const slicedRecords = records?.slice(start, end);
     setRecordData(slicedRecords);
   }, [start, end, records]);
- 
 
-  const onUpSortHandler = (data:any) => {
-    const sortData = [...(recordData || []) as string[][]];
+  const onUpSortHandler = (data: any) => {
+    const sortData = [...((recordData || []) as string[][])];
 
-    if (data != 1 || data != 4) sortData.sort((a:any, b:any) => a[data] - b[data]);
+    if (data != 1 || data != 4)
+      sortData.sort((a: any, b: any) => a[data] - b[data]);
     if (data == 1) sortData.sort((a, b) => a[data].localeCompare(b[data]));
     if (data == 3) sortData.sort(customAscendingSort);
     setRecordData(sortData);
@@ -47,8 +55,9 @@ export const RecordContainer: React.FC<RecordContainerProps> = ({
     });
   };
   const onDownSortHandler = (data: number) => {
-    const sortData =  [...(recordData || []) as string[][]];
-    if (data != 1 && data != 4) sortData.sort((a:any, b:any) => (b[data] - a[data]));
+    const sortData = [...((recordData || []) as string[][])];
+    if (data != 1 && data != 4)
+      sortData.sort((a: any, b: any) => b[data] - a[data]);
     if (data == 1) sortData.sort((a, b) => b[data].localeCompare(a[data]));
     if (data == 3) sortData.sort(customDescendingSort);
     setRecordData(sortData);
